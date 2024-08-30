@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e80c5083d05b99432ef33b58c37e5dce>>
+ * @generated SignedSource<<b54c89338ab2b8b7acaa4feca4cc56a1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -23,6 +23,7 @@ export type StoryFragment$data = {
     readonly url: string;
   } | null;
   readonly title: string;
+  readonly " $fragmentSpreads": FragmentRefs<"StoryLikeButtonFragment">;
   readonly " $fragmentType": "StoryFragment";
 };
 export type StoryFragment$key = {
@@ -104,6 +105,11 @@ return {
       "plural": false,
       "selections": (v0/*: any*/),
       "storageKey": null
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "StoryLikeButtonFragment"
     }
   ],
   "type": "Story",
@@ -111,6 +117,6 @@ return {
 };
 })();
 
-(node as any).hash = "8922fad08d91d16749ea83970500766c";
+(node as any).hash = "d267861301c49dd4b032240675274189";
 
 export default node;
