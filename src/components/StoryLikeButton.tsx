@@ -30,14 +30,21 @@ export default function StoryLikeButton({ story }: Props): React.ReactElement {
     StoryLikeButtonFragment,
     story
   );
-  const [commitMutation, isMutationInFlight] = useMutation(
-    StoryLikeButtonLikeMutation
-  );
+  const [commitMutation] = useMutation(StoryLikeButtonLikeMutation);
   const onLikeButtonClicked = () => {
     commitMutation({
       variables: {
         id: data.id,
         doesLike: !data.doesViewerLike,
+      },
+      optimisticResponse: {
+        likeStory: {
+          story: {
+            id: data.id,
+            likeCount: data.likeCount + (data.doesViewerLike ? -1 : 1),
+            doesViewerLike: !data.doesViewerLike,
+          },
+        },
       },
     });
   };
@@ -47,7 +54,6 @@ export default function StoryLikeButton({ story }: Props): React.ReactElement {
       <LikeButton
         doesViewerLike={data.doesViewerLike}
         onClick={onLikeButtonClicked}
-        disabled={isMutationInFlight}
       />
     </div>
   );
