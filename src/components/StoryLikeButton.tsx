@@ -1,5 +1,10 @@
 import * as React from "react";
-import { useFragment, graphql, useMutation } from "react-relay";
+import {
+  useFragment,
+  graphql,
+  useMutation,
+  useSubscription,
+} from "react-relay";
 
 import type { StoryLikeButtonFragment$key } from "./__generated__/StoryLikeButtonFragment.graphql";
 
@@ -25,11 +30,33 @@ const StoryLikeButtonLikeMutation = graphql`
   }
 `;
 
+function useStoryLikeCountSubscription(storyId: string) {
+  return useSubscription({
+    subscription: graphql`
+      subscription StoryLikeButtonSubscription {
+        storyLikeCount
+      }
+    `,
+    variables: {},
+    // update the store with the new like count
+    updater(store) {
+      const story = store.get(storyId);
+      if (story) {
+        const likeCount = story.getValue("likeCount");
+        if (typeof likeCount === "number") {
+          story.setValue(likeCount + 1, "likeCount");
+        }
+      }
+    },
+  });
+}
+
 export default function StoryLikeButton({ story }: Props): React.ReactElement {
   const data = useFragment<StoryLikeButtonFragment$key>(
     StoryLikeButtonFragment,
     story
   );
+  useStoryLikeCountSubscription(data.id);
   const [commitMutation] = useMutation(StoryLikeButtonLikeMutation);
   const onLikeButtonClicked = () => {
     commitMutation({

@@ -13,6 +13,7 @@
     "watch-relay": "relay-compiler --watch",
     "watch-webpack": "webpack server",
     "watch-server": "nodemon ./server/index.mjs",
+    "watch-server-2": "nodemon ./server-2/index.mjs",
     "dev": "concurrently npm:watch-* -c auto"
   },
   "license": "MIT",
@@ -43,15 +44,31 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "@graphql-tools/schema": "^10.0.6",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
     "graphiql": "^2.2.0",
     "graphql": "^17.0.0-alpha.2",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-relay": "^14.1.0",
-    "relay-runtime": "^14.1.0"
+    "relay-runtime": "^14.1.0",
+    "ws": "^8.18.0"
   },
   "overrides": {
     "graphiql": {
+      "graphql": "^17.0.0-alpha.2"
+    },
+    "@apollo/server": {
+      "graphql": "^17.0.0-alpha.2"
+    },
+    "@graphql-tools/schema": {
+      "graphql": "^17.0.0-alpha.2"
+    },
+    "graphql-subscriptions": {
       "graphql": "^17.0.0-alpha.2"
     }
   }

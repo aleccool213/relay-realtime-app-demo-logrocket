@@ -1,5 +1,10 @@
 import http from "http";
-import { execute, validate, validateSchema, parse } from "graphql";
+import {
+  experimentalExecuteIncrementally,
+  validate,
+  validateSchema,
+  parse,
+} from "graphql";
 import { schema } from "./schema.mjs";
 import { rootValue } from "./resolvers.mjs";
 
@@ -35,7 +40,7 @@ function graphql(args) {
     return { errors: validationErrors };
   }
   // Execute
-  return execute({
+  return experimentalExecuteIncrementally({
     schema,
     document,
     rootValue,

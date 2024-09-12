@@ -166,3 +166,9 @@ type StoryCommentMutationResponse {
   story: Story
   commentEdge: CommentsConnectionEdge
 }
+
+# ADDED FROM SERVER-2
+# TODO: AUTOMATE THIS
+type Subscription {
+  storyLikeCount: Int!
+}
